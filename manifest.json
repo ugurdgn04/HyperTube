@@ -1,15 +1,19 @@
 {
   "manifest_version": 3,
   "name": "HyperTube",
-  "version": "1.1",
+  "version": "1.2",
   "description": "YouTube için Glassmorphism ve Modüler Özelleştirme Eklentisi.",
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*"],
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
       "css": [
         "css/glass.css",
         "css/header.css",
@@ -23,8 +27,9 @@
         "js/filter.js",
         "js/dock.js",
         "js/profile.js",
-        "js/hyperbar.js",
+        "js/profileBridge.js",
         "js/headerRemover.js",
+        "js/hyperbar.js",
         "js/main.js"
       ],
       "run_at": "document_end"
