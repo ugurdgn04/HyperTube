@@ -1,29 +1,29 @@
 // ============================================================
-// HyperTube - YouTube Üst Barını Tamamen Kaldır
+// HyperTube - YouTube Üst Header + Frosted Glass Remover
 // ============================================================
 
 (function () {
 
-    const HEADER_SELECTORS = [
+    const REMOVE_SELECTORS = [
         "#masthead-container",
         "ytd-masthead",
         "#masthead",
-        "#container.ytd-masthead"
+        "#container.ytd-masthead",
+        "#frosted-glass"
     ];
 
     function removeYouTubeHeader() {
-        HEADER_SELECTORS.forEach(selector => {
+        REMOVE_SELECTORS.forEach(selector => {
             document.querySelectorAll(selector).forEach(element => {
                 element.remove();
             });
         });
     }
 
-    // İlk kontrol
+    // İlk çalıştırma
     removeYouTubeHeader();
 
-    // YouTube SPA olduğu için sayfa değişimlerinde
-    // header yeniden oluşturulursa tekrar kaldır.
+    // YouTube SPA tekrar oluşturursa tekrar kaldır
     const observer = new MutationObserver(() => {
         removeYouTubeHeader();
     });

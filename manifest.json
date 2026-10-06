@@ -14,7 +14,8 @@
         "css/glass.css",
         "css/header.css",
         "css/dock.css",
-        "css/profile.css"
+        "css/profile.css",
+        "css/hyperbar.css"
       ],
       "js": [
         "js/utils.js",
@@ -22,6 +23,7 @@
         "js/filter.js",
         "js/dock.js",
         "js/profile.js",
+        "js/hyperbar.js",
         "js/headerRemover.js",
         "js/main.js"
       ],

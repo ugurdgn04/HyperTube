@@ -1,0 +1,372 @@
+/* ============================================================
+   HyperTube HyperBar
+   ============================================================ */
+
+#ht-hyperbar {
+    position: fixed;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: max-content;
+    min-height: 48px;
+
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+
+    z-index: 2147483646;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   ANA BUTON
+   ============================================================ */
+
+.ht-hyperbar-item {
+    position: relative;
+
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 24px;
+
+    background: rgba(25,25,32,0.68);
+
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+
+    color: white;
+
+    overflow: hidden;
+
+    transition:
+        width 0.45s cubic-bezier(0.16,1,0.3,1),
+        min-width 0.45s cubic-bezier(0.16,1,0.3,1),
+        border-radius 0.45s cubic-bezier(0.16,1,0.3,1),
+        background 0.25s ease,
+        transform 0.3s ease;
+}
+
+
+/* ============================================================
+   İKON
+   ============================================================ */
+
+.ht-hyperbar-icon {
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    font-size: 18px;
+    line-height: 1;
+
+    color: rgba(255,255,255,0.92);
+}
+
+
+/* ============================================================
+   NORMAL BUTON HOVER
+   ============================================================ */
+
+.ht-hyperbar-item:not(.expanded):hover {
+    background: rgba(45,45,55,0.78);
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   AKTİF BUTON
+   ============================================================ */
+
+.ht-hyperbar-item.expanded {
+    width: 360px;
+    min-width: 360px;
+
+    justify-content: flex-start;
+
+    border-radius: 24px;
+}
+
+
+/* ============================================================
+   DİĞER BUTONLAR DARALDIĞINDA
+   ============================================================ */
+
+#ht-hyperbar.has-expanded .ht-hyperbar-item:not(.expanded) {
+    width: 38px;
+    min-width: 38px;
+}
+
+
+/* ============================================================
+   İÇERİK
+   ============================================================ */
+
+.ht-hyperbar-content {
+    width: 0;
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transition:
+        width 0.4s cubic-bezier(0.16,1,0.3,1),
+        opacity 0.2s ease;
+}
+
+
+.ht-hyperbar-item.expanded .ht-hyperbar-content {
+    width: 100%;
+
+    opacity: 1;
+}
+
+
+/* ============================================================
+   ARAMA
+   ============================================================ */
+
+.ht-search-input {
+    width: 100%;
+
+    height: 100%;
+
+    padding: 0 18px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    box-sizing: border-box;
+}
+
+
+.ht-search-input::placeholder {
+    color: rgba(255,255,255,0.48);
+}
+
+
+/* ============================================================
+   ARAMA NORMAL HAL
+   ============================================================ */
+
+.ht-search-item {
+    width: 48px;
+    min-width: 48px;
+}
+
+
+/* ============================================================
+   ARAMA ORTADA
+   ============================================================ */
+
+#ht-hyperbar.search-center {
+    left: 50%;
+}
+
+
+/* ============================================================
+   ARAMA SAĞDA
+   ============================================================ */
+
+#ht-hyperbar.search-right {
+    left: auto;
+    right: 18px;
+
+    transform: none;
+}
+
+
+/* ============================================================
+   SAĞDAKİ DİZİLİM
+   ============================================================ */
+
+#ht-hyperbar.search-right .ht-profile-item {
+    order: 1;
+}
+
+#ht-hyperbar.search-right .ht-notification-item {
+    order: 2;
+}
+
+#ht-hyperbar.search-right .ht-search-item {
+    order: 3;
+}
+
+
+/* ============================================================
+   CONTEXT İÇERİĞİ
+   ============================================================ */
+
+.ht-context-inner {
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 14px;
+
+    box-sizing: border-box;
+}
+
+
+.ht-context-title {
+    white-space: nowrap;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: rgba(255,255,255,0.9);
+}
+
+
+/* ============================================================
+   BİLDİRİM İÇERİĞİ
+   ============================================================ */
+
+.ht-notification-list {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    width: 100%;
+}
+
+
+.ht-notification-text {
+    white-space: nowrap;
+
+    font-size: 13px;
+
+    color: rgba(255,255,255,0.85);
+}
+
+
+/* ============================================================
+   PROFİL İÇERİĞİ
+   ============================================================ */
+
+.ht-profile-context {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+}
+
+
+.ht-profile-context-avatar {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+    background: rgba(255,255,255,0.1);
+}
+
+
+.ht-profile-context-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.ht-profile-context-name {
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: white;
+}
+
+
+/* ============================================================
+   KAPATMA
+   ============================================================ */
+
+.ht-hyperbar-item.expanded .ht-hyperbar-icon {
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   ARAMA ORTADAYKEN ÜST SINIR
+   ============================================================ */
+
+.ht-search-item.search-expanded {
+    width: min(520px, 45vw);
+    min-width: min(520px, 45vw);
+}
+
+
+/* ============================================================
+   KÜÇÜK EKRAN
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    #ht-hyperbar {
+        max-width: calc(100vw - 24px);
+    }
+
+    .ht-hyperbar-item.expanded {
+        width: min(300px, calc(100vw - 100px));
+        min-width: min(300px, calc(100vw - 100px));
+    }
+
+    .ht-search-item.search-expanded {
+        width: min(360px, 55vw);
+        min-width: min(360px, 55vw);
+    }
+
+}
