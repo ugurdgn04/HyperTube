@@ -1,0 +1,598 @@
+/* ============================================================
+   HyperTube Profile Menu
+   Liquid Glass / Morphing Avatar
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   PROFİL MENÜSÜ
+   ------------------------------------------------------------ */
+
+.ht-profile-menu {
+
+    position: fixed !important;
+
+    top: 12px !important;
+    right: 16px !important;
+
+    width: 48px !important;
+    height: 48px !important;
+
+    padding: 0 !important;
+
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+
+    z-index: 2147483647 !important;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    border-radius: 50% !important;
+
+    background:
+        rgba(25, 25, 32, 0.72) !important;
+
+    backdrop-filter:
+        blur(30px)
+        saturate(180%) !important;
+
+    -webkit-backdrop-filter:
+        blur(30px)
+        saturate(180%) !important;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.16) !important;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.45),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.12) !important;
+
+    transform-origin:
+        top right !important;
+
+    transform:
+        scale(0.85) !important;
+
+    transition:
+        width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        border-radius 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.2s ease !important;
+}
+
+
+/* ------------------------------------------------------------
+   AÇIK DURUM
+   ------------------------------------------------------------ */
+
+.ht-profile-menu.open {
+
+    width: 330px !important;
+
+    height: auto !important;
+
+    max-height:
+        calc(100vh - 24px) !important;
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    border-radius: 28px !important;
+
+    transform:
+        scale(1) !important;
+
+    overflow-y: auto !important;
+}
+
+
+/* ------------------------------------------------------------
+   İÇERİK
+   ------------------------------------------------------------ */
+
+.ht-profile-inner {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px;
+
+    opacity: 0;
+
+    transform:
+        scale(0.94);
+
+    transition:
+        opacity 0.18s ease 0.15s,
+        transform 0.3s
+        cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.ht-profile-menu.open
+.ht-profile-inner {
+
+    opacity: 1;
+
+    transform:
+        scale(1);
+}
+
+
+/* ------------------------------------------------------------
+   PROFİL BAŞLIĞI
+   ------------------------------------------------------------ */
+
+.ht-profile-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+        6px 6px 14px;
+}
+
+
+/* Avatar */
+
+.ht-profile-avatar {
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,0.1);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+}
+
+
+.ht-profile-avatar-img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* Profil yazısı */
+
+.ht-profile-user {
+
+    min-width: 0;
+}
+
+
+.ht-profile-name {
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.ht-profile-email {
+
+    margin-top: 3px;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-size: 12px;
+}
+
+
+/* ------------------------------------------------------------
+   KANAL BUTONU
+   ------------------------------------------------------------ */
+
+.ht-profile-channel {
+
+    width: 100%;
+
+    min-height: 42px;
+
+    border-radius: 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.14);
+
+    background:
+        rgba(255,255,255,0.09);
+
+    color: #5da9ff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.ht-profile-channel:hover {
+
+    background:
+        rgba(255,255,255,0.15);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ------------------------------------------------------------
+   NORMAL SATIRLAR
+   ------------------------------------------------------------ */
+
+.ht-profile-section {
+
+    margin-top: 10px;
+}
+
+
+.ht-profile-row {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+        0 12px;
+
+    box-sizing: border-box;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background:
+        transparent;
+
+    color:
+        rgba(255,255,255,0.92);
+
+    font-size: 13px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.ht-profile-row:hover {
+
+    background:
+        rgba(255,255,255,0.09);
+
+    transform:
+        translateX(2px);
+}
+
+
+.ht-profile-row-icon {
+
+    width: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color:
+        rgba(255,255,255,0.8);
+
+    font-size: 17px;
+}
+
+
+/* ------------------------------------------------------------
+   HESAP BUTONLARI
+   ------------------------------------------------------------ */
+
+.ht-profile-account-actions {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 7px;
+
+    margin-top: 10px;
+}
+
+
+.ht-profile-circle-action {
+
+    min-width: 0;
+
+    min-height: 86px;
+
+    padding:
+        8px 4px;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.09);
+
+    background:
+        rgba(255,255,255,0.055);
+
+    color:
+        rgba(255,255,255,0.82);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    font-size: 10px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.ht-profile-circle-action:hover {
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border-color:
+        rgba(255,255,255,0.17);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* Yuvarlak ikon */
+
+.ht-circle-icon {
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.1);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.13);
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* ------------------------------------------------------------
+   DİĞER SEÇENEKLER
+   ------------------------------------------------------------ */
+
+.ht-profile-other {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    margin-top: 10px;
+
+    padding:
+        0 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    color:
+        rgba(255,255,255,0.9);
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.ht-profile-other:hover {
+
+    background:
+        rgba(255,255,255,0.1);
+}
+
+
+.ht-profile-arrow {
+
+    font-size: 20px;
+
+    color:
+        rgba(255,255,255,0.55);
+}
+
+
+/* ------------------------------------------------------------
+   GELİŞMİŞ SEÇENEKLER
+   ------------------------------------------------------------ */
+
+.ht-profile-extra {
+
+    max-height: 0;
+
+    opacity: 0;
+
+    overflow: hidden;
+
+    transform:
+        translateY(-5px);
+
+    transition:
+        max-height 0.35s
+        cubic-bezier(0.16,1,0.3,1),
+
+        opacity 0.25s ease,
+
+        transform 0.3s ease;
+}
+
+
+.ht-profile-extra.open {
+
+    max-height: 360px;
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    margin-top: 5px;
+}
+
+
+/* Extra satır */
+
+.ht-profile-extra-row {
+
+    width: 100%;
+
+    min-height: 40px;
+
+    padding:
+        0 12px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        transparent;
+
+    color:
+        rgba(255,255,255,0.72);
+
+    font-size: 12px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease;
+}
+
+
+.ht-profile-extra-row:hover {
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: white;
+}
+
+
+/* ------------------------------------------------------------
+   SCROLLBAR
+   ------------------------------------------------------------ */
+
+.ht-profile-menu::-webkit-scrollbar {
+
+    width: 4px;
+}
+
+
+.ht-profile-menu::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(255,255,255,0.18);
+
+    border-radius: 10px;
+}

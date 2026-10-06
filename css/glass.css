@@ -1,0 +1,30 @@
+/* HyperTube Base & Glassmorphism */
+
+ytd-app {
+  background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2560&auto=format&fit=crop') no-repeat center center fixed !important;
+  background-size: cover !important;
+}
+
+#page-manager, 
+ytd-mini-guide-renderer, 
+#guide-wrapper,
+ytd-masthead {
+  background: transparent !important;
+}
+
+/* Video Kartları Cam Dokusu */
+ytd-rich-item-renderer {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(15px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(15px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  padding: 12px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+ytd-rich-item-renderer:hover {
+  transform: translateY(-5px) scale(1.01) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35), inset 0 0 12px rgba(255,255,255,0.15) !important;
+}
+

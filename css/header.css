@@ -1,0 +1,104 @@
+/* Arkadaki Yapışık Koyu Frame'i Gizleme */
+#masthead-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Header & Layout Fixes */
+
+/* Üst Barı Ekran İçinde Tutma (Kırmızı Ok Düzeltmesi) */
+ytd-masthead {
+  margin: 10px 20px !important;
+  max-width: calc(100vw - 40px) !important;
+  box-sizing: border-box !important;
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Orijinal YouTube 3 Çizgi Butonunu Gizleme */
+#guide-button.ytd-masthead {
+  display: none !important;
+}
+
+/* Kategori Barını Gizleme */
+#chips-wrapper, 
+ytd-feed-filter-chip-bar-renderer {
+  display: none !important;
+}
+
+/* Minimal Filtre Butonu */
+.ht-filter-container {
+  position: relative;
+  margin-left: 15px;
+  display: inline-block;
+}
+
+.ht-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.ht-filter-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.03);
+}
+
+.ht-filter-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+}
+/* YouTube varsayılan sol menüsünü ve mini rehberi gizle */
+ytd-guide-renderer,
+ytd-mini-guide-renderer,
+#guide,
+#guide-wrapper,
+app-drawer#guide {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+}
+
+/* Sayfa içeriğinin sol menü gizlendiğinde sola kayıp tam genişlik almasını sağla */
+ytd-app[guide-persistent-and-visible] #page-manager,
+ytd-page-manager {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    transition: background 0.2s ease;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-icon {
+    flex-shrink: 0;
+    fill: currentColor;
+}

@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "HyperTube",
+  "version": "1.1",
+  "description": "YouTube için Glassmorphism ve Modüler Özelleştirme Eklentisi.",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "css": [
+        "css/glass.css",
+        "css/header.css",
+        "css/dock.css",
+        "css/profile.css"
+      ],
+      "js": [
+        "js/utils.js",
+        "js/dockButtons.js",
+        "js/filter.js",
+        "js/dock.js",
+        "js/profile.js",
+        "js/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
