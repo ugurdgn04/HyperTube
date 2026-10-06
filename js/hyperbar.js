@@ -1,25 +1,12 @@
-// ============================================================
-// HyperTube HyperBar
-// ============================================================
-
 (function () {
 
-    // --------------------------------------------------------
-    // AYAR
-    // --------------------------------------------------------
-
-    // 1 = Arama ortada
-    // 2 = Arama sağda
     const searchset = 1;
 
+    let hyperBar = null;
+    let searchButton = null;
+    let notificationButton = null;
+    let profileButton = null;
 
-    let hyperbar = null;
-    let expandedItem = null;
-
-
-    // --------------------------------------------------------
-    // BAŞLAT
-    // --------------------------------------------------------
 
     function initHyperBar() {
 
@@ -36,549 +23,564 @@
     }
 
 
-    // --------------------------------------------------------
-    // HYPERBAR OLUŞTUR
-    // --------------------------------------------------------
-
     function createHyperBar() {
 
-        hyperbar = document.createElement("div");
+        hyperBar = document.createElement("div");
+        hyperBar.id = "ht-hyperbar";
 
-        hyperbar.id = "ht-hyperbar";
+        /*
+         * Profil her zaman en sağda.
+         */
+        hyperBar.innerHTML = `
 
-        hyperbar.className =
-            searchset === 2
-                ? "search-right"
-                : "search-center";
+            <div
+                class="ht-bar-button ht-search-button"
+                id="ht-search-button"
+            >
+                <div class="ht-bar-icon">
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M10.5 4a6.5 6.5 0 1 0 4.03 11.6l4.44 4.44
+                            1.41-1.41-4.44-4.44A6.5 6.5 0 0 0 10.5 4Zm0
+                            2a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Z"
+                        />
+                    </svg>
+                </div>
+
+                <div class="ht-bar-content">
+                    <input
+                        id="ht-search-input"
+                        type="text"
+                        placeholder="Ara"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                </div>
+            </div>
 
 
-        // ----------------------------------------------------
-        // PROFİL
-        // ----------------------------------------------------
+            <div
+                class="ht-bar-button ht-notification-button"
+                id="ht-notification-button"
+            >
+                <div class="ht-bar-icon">
 
-        const profile =
-            createItem(
-                "profile",
-                "Profil",
-                "●"
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5
+                            2.5 0 0 0 12 22Zm7-5-1.5-2V10a5.5 5.5
+                            0 0 0-4.5-5.4V4a1 1 0 0 0-2 0v.6A5.5
+                            5.5 0 0 0 6.5 10v5L5 17v1h14v-1Z"
+                        />
+                    </svg>
+
+                </div>
+
+                <div class="ht-bar-content">
+                    <div class="ht-notification-content">
+                        Bildirimler
+                    </div>
+                </div>
+            </div>
+
+
+            <div
+                class="ht-bar-button ht-profile-button"
+                id="ht-profile-button"
+            >
+                <div
+                    class="ht-profile-avatar-small"
+                    id="ht-profile-avatar-small"
+                >
+                </div>
+
+                <div class="ht-bar-content">
+                    <div class="ht-profile-content">
+                        Profil
+                    </div>
+                </div>
+            </div>
+
+        `;
+
+
+        document.body.appendChild(hyperBar);
+
+
+        searchButton =
+            document.querySelector(
+                "#ht-search-button"
+            );
+
+        notificationButton =
+            document.querySelector(
+                "#ht-notification-button"
+            );
+
+        profileButton =
+            document.querySelector(
+                "#ht-profile-button"
             );
 
 
-        // ----------------------------------------------------
-        // BİLDİRİMLER
-        // ----------------------------------------------------
+        copyProfileImage();
 
-        const notifications =
-            createItem(
-                "notification",
-                "Bildirimler",
-                "●"
+        setupSearch();
+
+        setupNotification();
+
+        setupProfile();
+
+        applySearchPosition();
+    }
+
+
+    /*
+     * YouTube'un gerçek profil fotoğrafını
+     * HyperBar'daki küçük yuvarlağa kopyala.
+     */
+    function copyProfileImage() {
+
+        const target =
+            document.querySelector(
+                "#ht-profile-avatar-small"
+            );
+
+        if (!target) {
+            return;
+        }
+
+
+        const youtubeAvatar =
+            document.querySelector(
+                "#avatar-btn img"
             );
 
 
-        // ----------------------------------------------------
-        // ARAMA
-        // ----------------------------------------------------
+        if (
+            youtubeAvatar &&
+            youtubeAvatar.src
+        ) {
 
-        const search =
-            createSearchItem();
+            target.innerHTML = "";
+
+            const image =
+                document.createElement("img");
+
+            image.src =
+                youtubeAvatar.src;
+
+            image.alt = "";
+
+            target.appendChild(image);
+
+            return;
+        }
 
 
-        // ----------------------------------------------------
-        // SIRALAMA
-        // ----------------------------------------------------
+        setTimeout(
+            copyProfileImage,
+            500
+        );
+    }
+
+
+    /*
+     * Aramanın konumu.
+     *
+     * 1 = orta
+     * 2 = sağ taraf
+     */
+    function applySearchPosition() {
+
+        if (!hyperBar) {
+            return;
+        }
+
 
         if (searchset === 1) {
 
-            profile.style.order = "1";
-            search.style.order = "2";
-            notifications.style.order = "3";
+            hyperBar.classList.add(
+                "ht-search-center"
+            );
 
         } else {
 
-            profile.style.order = "1";
-            notifications.style.order = "2";
-            search.style.order = "3";
+            hyperBar.classList.add(
+                "ht-search-right"
+            );
 
         }
-
-
-        hyperbar.appendChild(profile);
-        hyperbar.appendChild(search);
-        hyperbar.appendChild(notifications);
-
-
-        document.body.appendChild(hyperbar);
-
-
-        setupEvents(
-            profile,
-            notifications,
-            search
-        );
     }
 
 
-    // --------------------------------------------------------
-    // NORMAL BUTON
-    // --------------------------------------------------------
+    /*
+     * Arama
+     */
+    function setupSearch() {
 
-    function createItem(type, title, icon) {
-
-        const item =
-            document.createElement("div");
-
-        item.className =
-            "ht-hyperbar-item ht-" +
-            type +
-            "-item";
-
-        item.dataset.type = type;
-
-        item.innerHTML = `
-            <div class="ht-hyperbar-icon">
-                ${icon}
-            </div>
-
-            <div class="ht-hyperbar-content">
-                <div class="ht-context-inner">
-                    <span class="ht-context-title">
-                        ${title}
-                    </span>
-                </div>
-            </div>
-        `;
-
-        return item;
-    }
-
-
-    // --------------------------------------------------------
-    // ARAMA BUTONU
-    // --------------------------------------------------------
-
-    function createSearchItem() {
-
-        const item =
-            document.createElement("div");
-
-        item.className =
-            "ht-hyperbar-item ht-search-item";
-
-        item.dataset.type = "search";
-
-        item.innerHTML = `
-            <div class="ht-hyperbar-icon">
-                ⌕
-            </div>
-
-            <div class="ht-hyperbar-content">
-                <input
-                    class="ht-search-input"
-                    type="text"
-                    placeholder="Ara"
-                    autocomplete="off"
-                    spellcheck="false"
-                >
-            </div>
-        `;
-
-        return item;
-    }
-
-
-    // --------------------------------------------------------
-    // EVENTLER
-    // --------------------------------------------------------
-
-    function setupEvents(
-        profile,
-        notifications,
-        search
-    ) {
-
-        profile.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
-
-                if (
-                    expandedItem === profile
-                ) {
-                    collapseItem();
-                    return;
-                }
-
-                expandItem(profile);
-
-            }
-        );
-
-
-        notifications.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
-
-                if (
-                    expandedItem === notifications
-                ) {
-                    collapseItem();
-                    return;
-                }
-
-                expandItem(notifications);
-
-            }
-        );
-
-
-        search.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
-
-                if (
-                    expandedItem === search
-                ) {
-                    return;
-                }
-
-                expandItem(search);
-
-                const input =
-                    search.querySelector(
-                        ".ht-search-input"
-                    );
-
-                if (input) {
-
-                    setTimeout(() => {
-                        input.focus();
-                    }, 200);
-
-                }
-
-            }
-        );
+        if (!searchButton) {
+            return;
+        }
 
 
         const input =
-            search.querySelector(
-                ".ht-search-input"
+            searchButton.querySelector(
+                "#ht-search-input"
             );
 
 
-        if (input) {
-
-            input.addEventListener(
-                "click",
-                event => {
-                    event.stopPropagation();
-                }
-            );
-
-
-            input.addEventListener(
-                "keydown",
-                event => {
-
-                    if (
-                        event.key === "Enter"
-                    ) {
-
-                        const value =
-                            input.value.trim();
-
-                        if (!value) {
-                            return;
-                        }
-
-                        window.location.href =
-                            "/results?search_query=" +
-                            encodeURIComponent(value);
-
-                    }
-
-
-                    if (
-                        event.key === "Escape"
-                    ) {
-
-                        input.value = "";
-
-                        collapseItem();
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        document.addEventListener(
+        searchButton.addEventListener(
             "click",
             function (event) {
 
-                if (
-                    !hyperbar ||
-                    !hyperbar.contains(
-                        event.target
-                    )
-                ) {
+                event.stopPropagation();
 
-                    collapseItem();
-
-                }
-
-            }
-        );
-    }
-
-
-    // --------------------------------------------------------
-    // BUTON BÜYÜT
-    // --------------------------------------------------------
-
-    function expandItem(item) {
-
-        if (
-            expandedItem &&
-            expandedItem !== item
-        ) {
-
-            collapseItem();
-
-        }
-
-
-        expandedItem = item;
-
-        hyperbar.classList.add(
-            "has-expanded"
-        );
-
-        item.classList.add(
-            "expanded"
-        );
-
-
-        if (
-            item.dataset.type ===
-            "search"
-        ) {
-
-            item.classList.add(
-                "search-expanded"
-            );
-
-        }
-
-
-        if (
-            item.dataset.type ===
-            "profile"
-        ) {
-
-            openProfileContext(item);
-
-        }
-
-
-        if (
-            item.dataset.type ===
-            "notification"
-        ) {
-
-            openNotificationContext(item);
-
-        }
-    }
-
-
-    // --------------------------------------------------------
-    // BUTON KÜÇÜLT
-    // --------------------------------------------------------
-
-    function collapseItem() {
-
-        if (!expandedItem) {
-            return;
-        }
-
-
-        expandedItem.classList.remove(
-            "expanded"
-        );
-
-        expandedItem.classList.remove(
-            "search-expanded"
-        );
-
-
-        hyperbar.classList.remove(
-            "has-expanded"
-        );
-
-
-        expandedItem =
-            null;
-    }
-
-
-    // --------------------------------------------------------
-    // PROFİL CONTEXT
-    // --------------------------------------------------------
-
-    function openProfileContext(item) {
-
-        const content =
-            item.querySelector(
-                ".ht-hyperbar-content"
-            );
-
-        if (!content) {
-            return;
-        }
-
-
-        let avatarSrc = "";
-        let name = "Profil";
-
-
-        if (
-            typeof htProfileButton !==
-            "undefined" &&
-            htProfileButton
-        ) {
-
-            const image =
-                htProfileButton.querySelector(
-                    "img"
+                expandButton(
+                    searchButton
                 );
 
-            if (image) {
-                avatarSrc =
-                    image.src;
+                setTimeout(
+                    function () {
+
+                        input.focus();
+
+                    },
+                    150
+                );
             }
-
-        }
-
-
-        const nameElement =
-            document.querySelector(
-                ".ht-profile-name"
-            );
+        );
 
 
-        if (
-            nameElement &&
-            nameElement.textContent.trim()
-        ) {
+        input.addEventListener(
+            "click",
+            function (event) {
 
-            name =
-                nameElement.textContent.trim();
+                event.stopPropagation();
 
-        }
+            }
+        );
 
 
-        content.innerHTML = `
-            <div class="ht-profile-context">
+        input.addEventListener(
+            "keydown",
+            function (event) {
 
-                <div class="ht-profile-context-avatar">
+                if (
+                    event.key === "Enter"
+                ) {
 
-                    ${
-                        avatarSrc
-                            ? `<img src="${avatarSrc}">`
-                            : ""
+                    const value =
+                        input.value.trim();
+
+                    if (!value) {
+                        return;
                     }
 
-                </div>
 
-                <div class="ht-profile-context-name">
-                    ${escapeHTML(name)}
-                </div>
-
-            </div>
-        `;
-
-
-        content
-            .querySelector(
-                ".ht-profile-context"
-            )
-            ?.addEventListener(
-                "click",
-                function (event) {
-
-                    event.stopPropagation();
-
-                    if (
-                        typeof openHyperTubeProfileMenu ===
-                        "function"
-                    ) {
-
-                        collapseItem();
-
-                        openHyperTubeProfileMenu();
-
-                    }
-
+                    window.location.href =
+                        "/results?search_query=" +
+                        encodeURIComponent(
+                            value
+                        );
                 }
-            );
+
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    input.value = "";
+
+                    collapseButton(
+                        searchButton
+                    );
+                }
+            }
+        );
+
+
+        input.addEventListener(
+            "input",
+            function () {
+
+                /*
+                 * Yazdıkça büyüme.
+                 * CSS max-width sınırına ulaştığında
+                 * daha fazla büyümez.
+                 */
+
+                const length =
+                    input.value.length;
+
+                const size =
+                    Math.min(
+                        220 + length * 7,
+                        480
+                    );
+
+                searchButton.style.width =
+                    size + "px";
+            }
+        );
     }
 
 
-    // --------------------------------------------------------
-    // BİLDİRİM CONTEXT
-    // --------------------------------------------------------
+    /*
+     * Bildirim
+     */
+    function setupNotification() {
 
-    function openNotificationContext(item) {
-
-        const content =
-            item.querySelector(
-                ".ht-hyperbar-content"
-            );
-
-        if (!content) {
+        if (!notificationButton) {
             return;
         }
 
 
-        content.innerHTML = `
-            <div class="ht-notification-list">
+        notificationButton.addEventListener(
+            "click",
+            function (event) {
 
-                <span class="ht-notification-text">
-                    Bildirimler
-                </span>
+                event.stopPropagation();
 
-            </div>
-        `;
+                expandButton(
+                    notificationButton
+                );
+
+            }
+        );
     }
 
 
-    // --------------------------------------------------------
-    // HTML GÜVENLİĞİ
-    // --------------------------------------------------------
+    /*
+     * Profil
+     *
+     * Burada yeni profil menüsü oluşturmuyoruz.
+     * Mevcut profile.js'deki menüyü açıyoruz.
+     */
+    function setupProfile() {
 
-    function escapeHTML(value) {
+        if (!profileButton) {
+            return;
+        }
 
-        return String(value)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
+
+        profileButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                /*
+                 * Mevcut profile.js fonksiyonu.
+                 */
+                if (
+                    typeof openHyperTubeProfileMenu ===
+                    "function"
+                ) {
+
+                    openHyperTubeProfileMenu();
+
+                }
+
+            }
+        );
     }
 
 
-    // --------------------------------------------------------
-    // BAŞLAT
-    // --------------------------------------------------------
+    /*
+     * Buton büyütme
+     */
+    function expandButton(button) {
+
+        /*
+         * Önce diğer HyperBar butonlarını küçült.
+         */
+        document
+            .querySelectorAll(
+                ".ht-bar-button.ht-expanded"
+            )
+            .forEach(
+                function (other) {
+
+                    if (
+                        other !== button
+                    ) {
+
+                        collapseButton(
+                            other
+                        );
+                    }
+                }
+            );
+
+
+        button.classList.add(
+            "ht-expanded"
+        );
+
+
+        hyperBar.classList.add(
+            "ht-has-expanded"
+        );
+
+
+        /*
+         * Profil açıldığında mevcut profile.js
+         * menüsünü aç.
+         */
+        if (
+            button === profileButton
+        ) {
+
+            if (
+                typeof openHyperTubeProfileMenu ===
+                "function"
+            ) {
+
+                openHyperTubeProfileMenu();
+
+            }
+        }
+    }
+
+
+    /*
+     * Buton küçültme
+     */
+    function collapseButton(button) {
+
+        if (!button) {
+            return;
+        }
+
+
+        button.classList.remove(
+            "ht-expanded"
+        );
+
+
+        button.style.width = "";
+
+
+        if (
+            button === searchButton
+        ) {
+
+            const input =
+                button.querySelector(
+                    "#ht-search-input"
+                );
+
+            if (input) {
+                input.value = "";
+            }
+        }
+
+
+        /*
+         * Profil kapanıyorsa
+         * mevcut profile.js menüsünü kapat.
+         */
+        if (
+            button === profileButton
+        ) {
+
+            if (
+                typeof closeHyperTubeProfileMenu ===
+                "function"
+            ) {
+
+                closeHyperTubeProfileMenu();
+
+            }
+        }
+
+
+        const expanded =
+            document.querySelector(
+                ".ht-bar-button.ht-expanded"
+            );
+
+
+        if (!expanded) {
+
+            hyperBar.classList.remove(
+                "ht-has-expanded"
+            );
+
+        }
+    }
+
+
+    /*
+     * HyperBar dışına basılırsa kapat.
+     */
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                !hyperBar ||
+                hyperBar.contains(
+                    event.target
+                )
+            ) {
+                return;
+            }
+
+
+            document
+                .querySelectorAll(
+                    ".ht-bar-button.ht-expanded"
+                )
+                .forEach(
+                    collapseButton
+                );
+
+
+            /*
+             * Profil menüsü de kapanacak.
+             */
+            if (
+                typeof closeHyperTubeProfileMenu ===
+                "function"
+            ) {
+
+                closeHyperTubeProfileMenu();
+
+            }
+        }
+    );
+
+
+    /*
+     * YouTube avatarı sonradan yüklenirse
+     * tekrar kontrol et.
+     */
+    const observer =
+        new MutationObserver(
+            function () {
+
+                copyProfileImage();
+
+            }
+        );
+
+
+    observer.observe(
+        document.documentElement,
+        {
+            childList: true,
+            subtree: true
+        }
+    );
+
 
     initHyperBar();
 
