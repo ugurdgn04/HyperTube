@@ -103,31 +103,49 @@ ytd-page-manager {
     fill: currentColor;
 }
 /* =========================================================
-   HyperTube - YouTube Header Frame TAMAMEN KAPALI
+   HyperTube - YouTube üst barı GÖRÜNMEZ ama gerçek
+   (profil resmi yüklensin ve eski hesap menüsü açılabilsin)
    ========================================================= */
 
-#masthead-container,
-ytd-masthead,
-ytd-masthead#masthead,
-ytd-masthead #container,
-ytd-masthead #background {
-    display: none !important;
+#masthead-container {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 56px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
 
-    background: transparent !important;
-    background-color: transparent !important;
+ytd-masthead {
+  display: block !important;
+  visibility: visible !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 56px !important;
+  min-height: 56px !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 
-    border: none !important;
-    border-radius: 0 !important;
+/* YouTube'un eski hesap menüsü HyperBar'ın üstünde görünsün */
+ytd-popup-container {
+  z-index: 2147483647 !important;
+}
 
-    box-shadow: none !important;
-
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-
-    width: 0 !important;
-    height: 0 !important;
-    min-height: 0 !important;
+/* Kanal adresi bulunurken menü göz kırpmasın */
+body.ht-hide-native-popup ytd-popup-container {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }

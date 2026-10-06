@@ -28,7 +28,6 @@
         "js/dock.js",
         "js/profile.js",
         "js/profileBridge.js",
-        "js/headerRemover.js",
         "js/hyperbar.js",
         "js/main.js"
       ],
